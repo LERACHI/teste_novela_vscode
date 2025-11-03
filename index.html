@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!--
+    ____           _                   _   _                           _ 
+  / ___|   _ _ __(_) ___  _   _ ___  | \ | | ___  _ __ ___   __ _  __| |
+ | |  | | | | '__| |/ _ \| | | / __| |  \| |/ _ \| '_ ` _ \ / _` |/ _` |
+ | |__| |_| | |  | | (_) | |_| \__ \ | |\  | (_) | | | | | | (_| | (_| |
+  \____\__,_|_|  |_|\___/ \__,_|___/ |_| \_|\___/|_| |_| |_|\__,_|\__,_|
+                                                                                                                                                                        
+-->
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assista seus temas favoritos aqui</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Bebas Neue', sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 0;
+      background-color: #1f1f1f;
+      border-bottom: 2px solid #e50914;
+    }
+
+    header h1 {
+      font-size: 90px;
+      color: #e50914;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    .subtitulo {
+      font-size: 38px;
+      color: #ccc;
+    }
+
+    /* 🔹 GRID de cards */
+    #novelas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* 🔹 Cada card */
+    .card {
+      background-color: #1e1e1e;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(229,9,20,0.5);
+    }
+
+    .poster {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+    }
+
+    .content {
+      padding: 15px;
+    }
+
+    .content h2 {
+      margin-top: 0;
+      font-size: 30px;
+      color: #b0060f;
+    }
+
+    .content p {
+      margin: 8px 0;
+      color: #ccc;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .content a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #e50914;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .content a:hover {
+      background-color: #b0060f;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Escolha e Assista</h1>
+    <p class="subtitulo">As melhores novelas turcas e mexicanas da história.</p>
+  </header>
+
+  <div id="novelas"></div>
+
+  <script>
+    const novelas = [
+      { title:"Teresa", year:2010, poster:"imagens/novela1.jpg", country:"México", language:"Espanhol", episodes:152, cast:["Angelique Boyer","Sebastián Rulli","Aarón Díaz","Ana Brenda Contreras"], synopsis:"Teresa Chávez é uma bela jovem que usa sua beleza para sair dos pobres...", page:"paginas/novela1.html"},
+      { title:"Fatmagül", year:2010, poster:"imagens/novela2.jpg", country:"Turquia", language:"Turco", episodes:80, cast:["Beren Saat","Engin Akyürek","Fırat Çelik","Sumru Yavrucuk"], synopsis:"Fatmagül vive en un pueblo costero...", page:"paginas/novela2.html"},
+      { title:"O Famoso Alfaiate", year:2004, poster:"imagens/novela3.jpg", country:"Turquia", language:"Português", episodes:30, cast:["Çağatay Ulusoy","Salih Bademci","Şifanur Gül"], synopsis:"Um alfaiate renomado começa a fazer o vestido de casamento...", page:"paginas/novela3.html"},
+      { title:"Amor Eterno", year:2015, poster:"imagens/novela4.jpg", country:"Turquia", language:"Turco", episodes:74, cast:["Neslihan Atagül","Burak Özçivit","Kaan Urgancıoğlu","Neşe Baykent"], synopsis:"Kemal conoce a Nihan en un autobús...", page:"paginas/novela4.html"},
+      { title:"La Reina del Sur", year:2011, poster:"imagens/novela5.jpg", country:"México", language:"Espanhol", episodes:63, cast:["Kate del Castillo","Humberto Zurita","Rafael Amaya"], synopsis:"Após anos de sangue, suor e lágrimas...", page:"paginas/novela5.html"},
+      { title:"As Mil e Uma Noites", year:2006, poster:"imagens/novela6.jpg", country:"Turquia", language:"Turco", episodes:90, cast:["Bergüzar Korel","Halit Ergenç","Tardu Flordun","Metin Çekmez"], synopsis:"A dançarina Sherazade sonha em se tornar a esposa do califa Haroun...", page:"paginas/novela6.html"},
+      { title:"Asas da Ambição", year:2016, poster:"imagens/novela7.jpg", country:"Turquia", language:"Português", episodes:30, cast:["Birce Akalay","Miray Daner","İbrahim Çelikkol"], synopsis:"Ao se aproximar de uma famosa âncora de telejornais...", page:"paginas/novela7.html"},
+      { title:"Sortilégio", year:2009, poster:"imagens/novela8.jpg", country:"México", language:"Espanhol", episodes:95, cast:["Jacqueline Bracamontes","David Zepeda","William Levy"], synopsis:"Antonio le dice a Victoria que no le dejará la empresa a Bruno...", page:"paginas/novela8.html"},
+      { title:"Love 101", year:2020, poster:"imagens/novela9.jpg", country:"Turquia", language:"Português", episodes:20, cast:["Pınar Deniz","Kubilay Aka","Mert Yazıcıoğlu"], synopsis:"Ao tentarem unir uma professora e um treinador de basquete...", page:"paginas/novela9.html"},
+      { title:"Corazón Salvaje", year:2009, poster:"imagens/novela10.jpg", country:"México", language:"Espanhol", episodes:135, cast:["Eduardo Yáñez","Aracely Arámbula","Cristián de la Fuente","Nora Salinas"], synopsis:"María del Rosario vive un amor prohibido con Juan de Dios...", page:"paginas/novela10.html"},
+      { title:"Meu Nome é Melek", year:2019, poster:"imagens/novela11.jpg", country:"Turquia", language:"Espanhol", episodes:30, cast:["Ece Özdikici","Zeyno Eracar","Nizam Namidar"], synopsis:"Esta historia comienza cuando la hija de la familia Karadag...", page:"paginas/novela11.html"},
+      { title:"Meia-Noite no Hotel Pera Palace", year:2022, poster:"imagens/novela12.jpg", country:"Turquia", language:"Turco", episodes:20, cast:["Hazal Kaya","Tansu Biçer","Selahattin Paşalı"], synopsis:"Em um hotel histórico de Istambul, uma jornalista é lançada para o passado...", page:"paginas/novela12.html"}
+    ];
+
+    const container = document.getElementById("novelas");
+
+    novelas.forEach(novela => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${novela.poster}" alt="${novela.title}" class="poster">
+        <div class="content">
+          <h2>${novela.title} (${novela.year})</h2>
+          <p><strong>País:</strong> ${novela.country}</p>
+          <p><strong>Idioma:</strong> ${novela.language}</p>
+          <p><strong>Episódios:</strong> ${novela.episodes}</p>
+          <p>${novela.synopsis}</p>
+          <p><strong>Elenco:</strong> ${novela.cast.join(", ")}</p>
+          <a href="${novela.page}">Ver detalhes</a>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+<footer class="footer">
+  <div class="footer-top">
+    <p>Quer assistir? Informe seu email para criar ou reiniciar sua assinatura.</p>
+    <form class="email-form">
+      <input type="email" placeholder="Email" required>
+      <button type="submit">Vamos lá</button>
+    </form>
+  </div>
+
+  <div class="footer-links">
+    <ul>
+      <li><a href="#">Perguntas frequentes</a></li>
+      <li><a href="#">Central de Ajuda</a></li>
+      <li><a href="#">Conta</a></li>
+      <li><a href="#">Carreiras</a></li>
+      <li><a href="#">Privacidade</a></li>
+      <li><a href="#">Termos de Uso</a></li>
+      <li><a href="#">Entre em contato</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-bottom">
+    <select class="language">
+      <option>Português</option>
+      <option>English</option>
+    </select>
+    <p>by Curious Nomad</p>
+  </div>
+</footer>
+<style>
+.footer {
+  background-color: #000;
+  color: #999;
+  padding: 40px 10%;
+  font-family: Arial, sans-serif;
+}
+
+.footer-top {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.footer-top p {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.email-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.email-form input {
+  width: 300px;
+  padding: 10px;
+  border: none;
+  border-radius: 2px;
+}
+
+.email-form button {
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.footer-links ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links a {
+  color: #999;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.footer-bottom .language {
+  background-color: transparent;
+  color: #999;
+  border: 1px solid #999;
+  padding: 5px 10px;
+  border-radius: 2px;
+}
+
+.footer-bottom p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+<style>
+
+</body>
+</html>
